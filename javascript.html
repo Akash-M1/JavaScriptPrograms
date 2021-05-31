@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Js</title>
+</head>
+<body>
+	<p id="output">Text</p>
+	<input id="user_number"><button onclick="user_update()">Submit</button>
+
+	<script type="text/javascript">
+		function user_update(){
+			user_number=document.getElementById("user_number").value;
+			httprequest = new XMLHttpRequest();
+			httprequest.open("GET" , "https://reqres.in/api/users/"+user_number);
+			httprequest.send();
+			httprequest.onreadystatechange = function(){
+				if(this.readyState==4 && this.status==200){
+					user_data=JSON.parse(this.responseText);
+					document.getElementById("output").innerHTML=user_data.data.first_name;
+				}
+			}
+		}
+	</script>
+
+</body>
+</html>
